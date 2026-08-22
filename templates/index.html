@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Giorgia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="scene" id="scene">
+
+    <p class="hint" id="hint">Open the envelope my love&nbsp;💌</p>
+
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+
+      <!-- LETTER CARD: edit the text inside .letter-body below -->
+      <div class="letter" id="letter">
+        <button class="letter-close" id="letterClose" aria-label="Close letter">✕ close</button>
+        <div class="letter-body">
+          <p class="letter-greeting">To my love Giorgia,</p>
+
+          <p>
+            I know it's been a while since I last wrote a letter for you and I hope you aren't too mad about that. I want you
+            to know how incredibly lucky I am to have you in my life. Every day I find myself smiling just thinking about you
+            and how much happiness one person can bring. I never want to take that for granted, and I'm sorry if I ever made
+            you feel that way.
+            
+          </p>
+          <p>
+            I know I always say I love you the most and more than anything, but the truth is, I'm still learning
+            what it really means to love someone as much as I love you. I want to be the best partner I can be for you, but there are times
+            when I fall short. I'm not perfect, and I know that, but everyday I work on myself to be the person that you deserve.
+          </p>
+          <p>
+            You've shown me what selfless love truly looks like. Not just this year but every year we've been together,
+            you put me before yourself in ways I can't even begin to describe. Carrying me through moments when I was tired,
+            stressed, or overwhelmed, you always made sure I was okay before you even thought about yourself. Thank you for
+            always choosing me, for loving me, and for being the most amazing person I could ever ask for. 
+          </p>
+
+          <p class="letter-signoff">Your love,<br>Joo Wang Lee</p>
+        </div>
+      </div>
+      <!-- END LETTER CARD -->
+
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="seal">♥</div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

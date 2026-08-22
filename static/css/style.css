@@ -1,0 +1,231 @@
+:root {
+  --bg-purple-1: #8f6fd8;
+  --bg-purple-2: #6a4bb0;
+  --envelope-back: #f0b8cf;
+  --envelope-front: #f6cfdf;
+  --envelope-flap: #ee9fc0;
+  --card-pink: #fdeef4;
+  --card-pink-border: #f6c6dc;
+  --ink: #7a4a63;
+  --ink-soft: #a97b95;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", "Trebuchet MS", Verdana, sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.10), transparent 40%),
+    radial-gradient(circle at 80% 75%, rgba(255, 255, 255, 0.08), transparent 45%),
+    linear-gradient(160deg, var(--bg-purple-1), var(--bg-purple-2));
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.hint {
+  position: absolute;
+  top: calc(50% + 150px);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.envelope {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 80vw);
+  height: min(210px, 52vw);
+  perspective: 1200px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.envelope-back,
+.envelope-front,
+.envelope-flap,
+.letter,
+.seal {
+  position: absolute;
+}
+
+.envelope-back {
+  inset: 0;
+  background: var(--envelope-back);
+  border-radius: 14px;
+  box-shadow: 0 25px 45px rgba(35, 15, 55, 0.35);
+  z-index: 1;
+}
+
+.letter {
+  left: 6%;
+  right: 6%;
+  top: 10%;
+  height: 78%;
+  background: var(--card-pink);
+  border: 1px solid var(--card-pink-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(70, 20, 50, 0.18);
+  z-index: 2;
+  transform: translateY(18%) scale(0.92);
+  transform-origin: 50% 100%;
+  transition: transform 0.6s cubic-bezier(0.34, 1.1, 0.4, 1), width 0.6s ease, height 0.6s ease;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.letter-close {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.letter-close:hover {
+  color: var(--ink);
+}
+
+.letter-body {
+  height: 100%;
+  overflow-y: auto;
+  padding: 34px 26px 26px;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.letter-greeting {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.letter-signoff {
+  margin-top: 24px;
+  font-style: italic;
+}
+
+.envelope-front {
+  inset: 0;
+  background: var(--envelope-front);
+  border-radius: 14px;
+  z-index: 3;
+  transition: opacity 0.35s ease 0.05s;
+}
+
+.envelope-flap {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  background: var(--envelope-flap);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  border-radius: 14px 14px 0 0;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+  z-index: 4;
+  transition: transform 0.6s ease, z-index 0s 0.6s;
+}
+
+.seal {
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #d9527c;
+  color: #ffe3ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  z-index: 5;
+  box-shadow: 0 4px 8px rgba(90, 10, 40, 0.35);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* --- open state --- */
+
+.envelope.is-open {
+  cursor: default;
+  overflow: visible;
+}
+
+.envelope.is-open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+  transition: transform 0.6s ease, z-index 0s 0s;
+}
+
+.envelope.is-open .seal {
+  opacity: 0;
+  transform: translate(-50%, 0) scale(0.4);
+}
+
+.envelope.is-open .envelope-front {
+  opacity: 0;
+  z-index: 0;
+}
+
+.envelope.is-open .envelope-back {
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.envelope.is-open .letter {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  height: min(72vh, 560px);
+  width: min(86vw, 460px);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: 50% 50%;
+  z-index: 6;
+  pointer-events: auto;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+              top 0s 0.15s, left 0s 0.15s, right 0s 0.15s,
+              width 0s 0.15s, height 0.6s ease 0.15s;
+}
+
+.envelope.is-open .letter-close {
+  display: block;
+}
+
+.scene.is-open .hint {
+  opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .envelope.is-open .letter {
+    width: 90vw;
+    height: min(78vh, 520px);
+  }
+}
