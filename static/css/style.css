@@ -81,8 +81,18 @@ body {
 
 @media (max-width: 700px) {
   .photo {
-    display: none;
+    width: 78px;
+    padding: 6px 6px 16px;
   }
+
+  .photo-img {
+    height: 78px;
+  }
+
+  .photo-1 { top: 3%; left: 3%; }
+  .photo-2 { top: 4%; right: 3%; }
+  .photo-3 { bottom: 3%; left: 4%; }
+  .photo-4 { bottom: 4%; right: 4%; }
 }
 
 .envelope {
