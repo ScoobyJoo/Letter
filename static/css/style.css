@@ -8,6 +8,8 @@
   --card-pink-border: #f6c6dc;
   --ink: #7a4a63;
   --ink-soft: #a97b95;
+  --heart-red: #e0475f;
+  --heart-pink: #f7a8c4;
 }
 
 * {
@@ -49,6 +51,41 @@ body {
   pointer-events: none;
 }
 
+.hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -10%;
+  opacity: 0;
+  line-height: 1;
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(12deg);
+    opacity: 0;
+  }
+}
+
 .photo {
   position: fixed;
   width: 150px;
@@ -61,12 +98,25 @@ body {
 }
 
 .photo-img {
+  position: relative;
   width: 100%;
   height: 150px;
   background-color: #e7d7f2;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.photo-layer {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.photo-layer.active {
+  opacity: 1;
 }
 
 .photo-1 { top: 6%; left: 4%; transform: rotate(-7deg); }
